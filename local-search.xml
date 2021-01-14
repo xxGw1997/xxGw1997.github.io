@@ -8,7 +8,7 @@
     <link href="/2021/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-http%E6%8A%A5%E6%96%87/"/>
     <url>/2021/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-http%E6%8A%A5%E6%96%87/</url>
     
-    <content type="html"><![CDATA[<h1 id="计算机网络-http报文"><a href="#计算机网络-http报文" class="headerlink" title="计算机网络-http报文"></a>计算机网络-http报文</h1><h2 id="1、http报文概念"><a href="#1、http报文概念" class="headerlink" title="1、http报文概念"></a>1、http报文概念</h2><p>http报文就是http通信的基本单位,由8位字节流组成</p><h2 id="2、http报文的整体结构"><a href="#2、http报文的整体结构" class="headerlink" title="2、http报文的整体结构"></a>2、http报文的整体结构</h2>]]></content>
+    <content type="html"><![CDATA[<h1 id="计算机网络-http报文"><a href="#计算机网络-http报文" class="headerlink" title="计算机网络-http报文"></a>计算机网络-http报文</h1><h2 id="1、http报文概念"><a href="#1、http报文概念" class="headerlink" title="1、http报文概念"></a>1、http报文概念</h2><p>http报文就是http通信的基本单位,由8位字节流组成</p><h2 id="2、http报文的整体结构"><a href="#2、http报文的整体结构" class="headerlink" title="2、http报文的整体结构"></a>2、http报文的整体结构</h2><p>整体结构:报文首部 + 空行 + 报文实体<br>对于请求报文和响应报文又有区别</p><h3 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h3><p>报文首部: 请求方法 + URI + HTTP版本 + HTTP首部字段<br>空行: CR + LF<br>报文实体: ….</p><h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><p>报文首部: HTTP版本 + 状态码 + HTTP首部字段<br>空行: CR + LF<br>报文实体: ….</p><h2 id="3、HTTP报文具体组成"><a href="#3、HTTP报文具体组成" class="headerlink" title="3、HTTP报文具体组成"></a>3、HTTP报文具体组成</h2>]]></content>
     
     
     
