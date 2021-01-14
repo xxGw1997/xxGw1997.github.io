@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.4k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      25
        分钟
     </span>
   
@@ -277,8 +277,28 @@
 <li>参数角度:GET只能放在url上进行传递,信息比较透明,POST请求将参数放在请求体中,相较GET请求来说比较安全</li>
 <li>TCP角度:GET请求会一次性将请求报文给发送出去,而POST会分为两个TCP数据包(火狐浏览器除外),POST首先会将header部分的数据发送出去,待服务器响应100,则再发送body部分数据。GET和POST发送数据的分TCP数据包的方式,GET只发送一次速度肯定会比POST来的快,但是在网络好的情况下,这种差异可以忽略不计。而且在网络较差的情况下,两次包的TCP在验证数据的完整性上更加有优势。</li>
 </ul>
-<h2 id="4、状态码"><a href="#4、状态码" class="headerlink" title="4、状态码"></a>4、状态码</h2><ul>
-<li>TODO</li>
+<h2 id="4、状态码"><a href="#4、状态码" class="headerlink" title="4、状态码"></a>4、状态码</h2><h3 id="1xx-表示请求已经收到-但是需要进一步处理才能够完成"><a href="#1xx-表示请求已经收到-但是需要进一步处理才能够完成" class="headerlink" title="1xx  表示请求已经收到,但是需要进一步处理才能够完成"></a>1xx  表示请求已经收到,但是需要进一步处理才能够完成</h3><ul>
+<li>101 Switching Protocols:在Http升级为websocket时,如果服务器同意变更,则返回101</li>
+</ul>
+<h3 id="2xx-表示请求成功"><a href="#2xx-表示请求成功" class="headerlink" title="2xx  表示请求成功"></a>2xx  表示请求成功</h3><ul>
+<li>200 OK 请求成功,并且返回的数据中通常有响应体</li>
+<li>204 No Content  与200一样,但是区别在于返回的数据中没有响应体</li>
+<li>206 Patial Content  客户端进行了范围请求并且服务端进行了正常的处理</li>
+</ul>
+<h3 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx  重定向"></a>3xx  重定向</h3><ul>
+<li>301 Moved Permanently 永久重定向,重定向的地址为响应报文首部的Location字段。并且浏览器会进行缓存处理,如果还是输入之前的url,浏览器会自动访问重定向后的地址</li>
+<li>302 Found  临时重定向,表示访问的地址临时被移动到其他的url上,与301不同的是浏览器不会进行缓存处理</li>
+</ul>
+<h3 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx  客户端错误"></a>4xx  客户端错误</h3><ul>
+<li>400 Bad Request   请求报文中存在语法错误</li>
+<li>401 Unauthorized  需要有通过HTTP认证的认证信息或者表示用户认证失败</li>
+<li>403 Forbidden     访问的资源被拒绝,原因:法律禁止、敏感信息</li>
+<li>404 Not Found     请求资源未找到,表示没有在服务器上找到对应的资源</li>
+</ul>
+<h3 id="5xx-服务端错误"><a href="#5xx-服务端错误" class="headerlink" title="5xx  服务端错误"></a>5xx  服务端错误</h3><ul>
+<li>500 Internal Server Error  服务器内部错误并且没有指明错误</li>
+<li>502 Bad Gateway   服务器自身响应正常,但是通过代理的服务器无法获取到合法响应(ps:国内修改r星账户密码时跳转页面通常都是这个)</li>
+<li>503 Service Unavailable   服务器内部超出负载或者停机维护</li>
 </ul>
 
             </div>
@@ -295,6 +315,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-http%E6%8A%A5%E6%96%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络-http报文</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
