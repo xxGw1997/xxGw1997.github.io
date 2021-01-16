@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      855 字
+      1.1k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      13
        分钟
     </span>
   
@@ -251,7 +251,7 @@
 </ul>
 <p>这里需要记住每种类型中常用的字段</p>
 <h4 id="1-通用首部字段"><a href="#1-通用首部字段" class="headerlink" title="1.通用首部字段"></a>1.通用首部字段</h4><ul>
-<li><p>1.Cache-Control</p>
+<li><p>1.Cache-Control<br>  //TODO</p>
 </li>
 <li><p>2.Date<br>  用于表示创建报文的时间和日期<br>  例:Date:Sun,05 Jar 2021 19:00:00 GMT</p>
 </li>
@@ -259,6 +259,20 @@
 <p>  <strong>这里还有一个首部字段的key为Keep-Alive</strong><br>  可以用来设置最大的请求数和超时时间<br>  Keep-Alive:timeout=5,max=1000 (timeout代表一个空闲连接需要保持打开状态的最小时长——单位秒,max代表在此连接可以发送请求的最大值)<br>  这个字段设置的值的前提是需要设置Connection:Keep-Alive,不然设置的没有意义</p>
 </li>
 <li><p>4.Transfer-Encoding<br>  作用: 规定传输的报文中主体部分使用的编码方式<br>  例: Transfer-Encoding:chunked(代表分块出传输)</p>
+</li>
+</ul>
+<h4 id="2-请求首部字段"><a href="#2-请求首部字段" class="headerlink" title="2.请求首部字段"></a>2.请求首部字段</h4><ul>
+<li><p>1.Host<br>  作用:可以明确指出主机名或域名<br>  例:如果一台服务器上托管了多个域名,那么在进行DNS域名解析时,会得到相同的IP地址,因此需要在Http请求时,在Host首部进行指出完整的主机名或域名的URI</p>
+</li>
+<li><p>2.Accept<br>  作用:客户端或者代理能够处理的媒体类型<br>  下文将详细介绍</p>
+</li>
+<li><p>3.Authorization<br>  作用:web的一些认证相关的信息</p>
+</li>
+<li><p>4.User-Agent<br>  作用:将创建请求的浏览器和用户代理名称等信息传给服务器<br>  例:user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36</p>
+</li>
+<li><p>5.Range<br>  作用:获取资源的某个范围的部分,用于断点续传<br>  例:Range:bytes=5001-10000<br>  响应报文状态行返回206状态码和Partial Content 说明 和响应头中带上Content-Range<br>  例:Http/1.1 206 Partial Content</p>
+<pre><code> Content-Range:bytes 5001-10000
+ 如果无法处理则返回200 OK 和整个资源</code></pre>
 </li>
 </ul>
 
