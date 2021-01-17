@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.8k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      21
        分钟
     </span>
   
@@ -273,6 +273,42 @@
 <li><p>5.Range<br>  作用:获取资源的某个范围的部分,用于断点续传<br>  例:Range:bytes=5001-10000<br>  响应报文状态行返回206状态码和Partial Content 说明 和响应头中带上Content-Range<br>  例:Http/1.1 206 Partial Content</p>
 <pre><code> Content-Range:bytes 5001-10000
  如果无法处理则返回200 OK 和整个资源</code></pre>
+</li>
+</ul>
+<h4 id="3-响应首部字段"><a href="#3-响应首部字段" class="headerlink" title="3.响应首部字段"></a>3.响应首部字段</h4><ul>
+<li><p>1.Location<br>  作用:用于指向重定向之后的url<br>  一般状态码返回3xx 时,响应报文中首部字段会有Location来指示重定向的url</p>
+</li>
+<li><p>2.Server<br>  作用:告知客户端当前服务器上安装的HTTP服务器应用程序的信息<br>  例:Server:nginx</p>
+</li>
+<li><p>3.Age<br>  作用:告诉客户端,服务器在多久之前创建的了响应<br>  如果创建该响应的是缓存服务器,则表示缓存后的响应再次发起认证到认证完成的时间值<br>  例:Age:600(单位是秒)</p>
+</li>
+</ul>
+<h4 id="4-实体首部字段"><a href="#4-实体首部字段" class="headerlink" title="4.实体首部字段"></a>4.实体首部字段</h4><ul>
+<li><p>1.Allow<br>  作用:告诉客户端服务器能够支持的Http方法<br>  例:Allow:GET,POST,HEAD<br>  当服务器收到不能够支持的方法时,会返回状态405 Method Not Allowed,并且会把所有支持的方法写入响应报文首部字段Allow中返回给客户端</p>
+</li>
+<li><p>2.Last Modified<br>  作用:资源最后的修改时间,一般配合If-Modified-Since 失效协商缓存<br>  例:Last-Modified:Wed,Nov 11 2020 08:00:00 GMT</p>
+</li>
+<li><p>3.Expires<br>  作用:强缓存的一种方式,设置资源缓存的失效时间<br>  例:Expires:Wed,Nov 11 2020 08:00:00 GMT</p>
+</li>
+</ul>
+<h4 id="5-非标准首部字段"><a href="#5-非标准首部字段" class="headerlink" title="5.非标准首部字段"></a>5.非标准首部字段</h4><p><strong>非标准首部的字段是自行扩展的</strong></p>
+<ul>
+<li><p>1.Cookie<br>  作用:客户端传递给服务器的一些Cookie信息<br>  例:Cookie:name=xxgw</p>
+</li>
+<li><p>2.Set-Cookie<br>  作用:服务器在响应报文中设置要传递给客户端的Cookie信息<br>  例:Set-Cookie:name=xxgw;HttpOnly</p>
+</li>
+</ul>
+<h4 id="6-Accept相关字段"><a href="#6-Accept相关字段" class="headerlink" title="6.Accept相关字段"></a>6.Accept相关字段</h4><p>按照类别可以分为5类</p>
+<ul>
+<li><p>1.数据格式<br>  表示接收方期望收到的数据格式<br>  请求报文:接收方-&gt;Accept<br>  响应报文:发送方-&gt;Content-Type<br>  <strong>例:</strong><br>  text:text/html,text/plain,text/css<br>  image:image/gif,image/jpeg,image/png<br>  application:application/json,application/javascript</p>
+</li>
+<li><p>2.压缩方式<br>  表示采用哪种方式进行压缩<br>  请求报文:接收方-&gt;Accept-Encoding<br>  响应报文:发送方-&gt;Content-Encoding<br>  例:字段值:<br>  gzip(使用最多的)<br>  deflate(另外一种著名的压缩格式)<br>  br(一种专门为http发明的压缩算法)</p>
+</li>
+<li><p>3.支持语言<br>  指定语言集优先级<br>  请求报文:接收方-&gt;Accept-Language<br>  响应报文:发送方-&gt;Content-Language<br>  例:zh-CN,zh,en</p>
+</li>
+<li><p>4.范围请求<br>  表示获取资源的某范围的部分<br>  请求报文:接收方-&gt;If-Range和Range<br>  响应报文:发送方-&gt;Accept-Ranges和Content-Range<br>  例:<br>  <strong>请求</strong><br>  If-Range:”usage-11111”<br>  Range:bytes=5001-10000<br>  <strong>响应</strong><br>  Http/1.1 206 Partial Content<br>  Accept-Range:bytes<br>  Content-Range:bytes 5001-10000/10000</p>
+</li>
+<li><p>5.字符集<br>  指定字符的类型集<br>  请求报文:接收方-&gt;Accept-Chartset<br>  响应报文:发送方-&gt;Content-Type<br>  例:chartset=utf8</p>
 </li>
 </ul>
 
