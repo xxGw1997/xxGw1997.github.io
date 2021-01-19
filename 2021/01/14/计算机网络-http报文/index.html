@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.9k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24
+      33
        分钟
     </span>
   
@@ -320,7 +320,35 @@
 <li>传输编码<br>区别:</li>
 </ul>
 <p><strong>内容编码</strong>:通常对于实体内容进行压缩编码,目的就是优化传输,例如使用gzip压缩文本文件,能大幅度减小体积。且通常是有选择性的,例如jpg、png这种图片类格式的文件就不会进行再压缩,因为这类资源已经不能够再进行压缩了。<br><strong>传输编码</strong>:这个指的就是来改变报文格式的,通常在头部加入了Transfer-Encoding:chunked,实现分块编码.<br>以上两个的相同点就是都是进行在实体主体部分的可逆变换。相当于,从一个地方将电脑主机给拆成零件,然后进行运输到目的地后,再将这些零件给拼装起来.</p>
-<h3 id="5-1内容编码"><a href="#5-1内容编码" class="headerlink" title="5.1内容编码"></a>5.1内容编码</h3><h3 id="5-2传输编码"><a href="#5-2传输编码" class="headerlink" title="5.2传输编码"></a>5.2传输编码</h3>
+<h3 id="5-1内容编码"><a href="#5-1内容编码" class="headerlink" title="5.1内容编码"></a>5.1内容编码</h3><h4 id="内容编码介绍"><a href="#内容编码介绍" class="headerlink" title="内容编码介绍"></a>内容编码介绍</h4><p>表示http应用程序在发送请求之前会对内容进行编码,使用Content-Encoding来指定编码格式,Content-Length来指定文件的大小<br>具体过程:</p>
+<ul>
+<li>1.服务器生成原始的响应报文,有Content-Type和Content-Length首部字段</li>
+<li>2.将原始的响应报文经过内容编码服务器创建编码后的报文。这个编码后的报文同样有Content-type和Content-Length两个字段。但是其中Content-Length字段会改变,会变小,因为进行编码后文件肯定会变小。</li>
+<li>3.然后会新增一个Content-Encoding 首部字段,目的是执行编码的方式,这样收到的应用程序就知道需要使用哪种格式去进行解码。</li>
+<li>4.接收程序收到响应后,根据Content-Encoding去进行解码得到原始的响应报文</li>
+</ul>
+<h4 id="内容编码类型"><a href="#内容编码类型" class="headerlink" title="内容编码类型"></a>内容编码类型</h4><ul>
+<li><p>Accept-Encoding(请求报文)<br>是在请求报文定义的首部字段,用于告诉服务器客户端能够支持哪种编码方式,服务器会根据这些编码方式来进行选择其中一项进行编码,如果没有定义Accept-Encoding则服务器会默认认为是能够接受任何方式的编码即Accept-Encoding:*</p>
+</li>
+<li><p>Content-Encoding(响应报文)<br>是在响应报文定义的首部字段,作用就是告诉客户端采用了哪种编码方式,客户端会根据该编码方式进行解析</p>
+</li>
+</ul>
+<h4 id="内容编码代号"><a href="#内容编码代号" class="headerlink" title="内容编码代号"></a>内容编码代号</h4><p>gzip:实体采用GUN zip 编码<br>compress:实体采用Unix的文件压缩程序<br>deflate：实体使用zlib的格式压缩<br>identity：不对实体进行编码。当没有Content-Encoding首部的时候，就默认这种情况</p>
+<h4 id="内容编码与HTTP压缩"><a href="#内容编码与HTTP压缩" class="headerlink" title="内容编码与HTTP压缩"></a>内容编码与HTTP压缩</h4><p>Http压缩,在http协议中,其实就是内容编码的一种</p>
+<p>内容编码的方式有很多种,可以使用如gzip的方式将内容进行压缩,从而可以减少实体的传输时间</p>
+<p>也可以使用其他的编码对内容进行加密处理,以防三方进行拦截数据</p>
+<h4 id="http压缩的具体过程"><a href="#http压缩的具体过程" class="headerlink" title="http压缩的具体过程"></a>http压缩的具体过程</h4><p>Http压缩就是服务器与客户端之间压缩传输的文本内容的方法</p>
+<p>http采用通用的压缩算法gzip,对html、js、css文件进行压缩</p>
+<p>例:Accept-Encoding:gzip</p>
+<ul>
+<li>1.浏览器发送请求,并且请求首部字段中有Accept-Encoding:gzip</li>
+<li>2.服务器接受到请求后,生成原始的响应报文,其中有Content-Type:… 和 Content-Length:1000 这两个字段</li>
+<li>3.服务器在对原始报文实体部分进行gzip编码处理。编码后在首部字段中将Content-Length的值改为编码处理后的长度,并且新增Content-Encoding:gzip字段,再将编码后的报文发送给客户端</li>
+<li>4.客户端收到请求后,根据响应首部字段中的Content-Type的编码方式对实体进行解码,得到原始的响应报文</li>
+</ul>
+<p><strong>gizp压缩的本质就是将相同的字符替换,从而得到减小文件的体积</strong></p>
+<h3 id="5-2传输编码"><a href="#5-2传输编码" class="headerlink" title="5.2传输编码"></a>5.2传输编码</h3><p>传输编码就是对内容编码之后的tranfer-Encoding再进行编码,对编码后的内容进行分块,每一块都有长度标识</p>
+
             </div>
             <hr>
             <div>
